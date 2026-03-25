@@ -8,16 +8,17 @@
 
 :root {
     /* Color Palette */
-    --color-primary: #667eea;
-    --color-primary-dark: #764ba2;
-    --color-secondary: #f5f7fa;
-    --color-secondary-dark: #c3cfe2;
+    --color-primary: #e8a0b0;
+    --color-primary-dark: #c97a90;
+    --color-primary-light: #f5d0d9;
+    --color-secondary: #fdf6f8;
+    --color-secondary-dark: #f0d9e0;
     --color-text-primary: #333;
     --color-text-secondary: #666;
     --color-text-light: #fff;
-    --color-background: #f8f9fa;
+    --color-background: #fdf6f8;
     --color-surface: #fff;
-    --color-footer: #2c3e50;
+    --color-footer: #5a3a40;
 
     /* Spacing System (8px grid) */
     --spacing-xs: 0.5rem;   /* 8px */
@@ -42,7 +43,7 @@
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.2);
-    --shadow-primary: 0 4px 8px rgba(102, 126, 234, 0.3);
+    --shadow-primary: 0 4px 8px rgba(232, 160, 176, 0.4);
 
     /* Border Radius */
     --radius-sm: 15px;
@@ -79,8 +80,8 @@ body {
 
 .header,
 header {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    color: var(--color-text-light);
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+    color: var(--color-surface);
     text-align: center;
     padding: var(--spacing-xl) var(--spacing-sm);
     box-shadow: var(--shadow-md);
@@ -89,14 +90,11 @@ header {
 .header__title,
 header h1 {
     font-size: var(--font-size-3xl);
-    margin-bottom: var(--spacing-xs);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.header__subtitle,
-.subtitle {
-    font-size: var(--font-size-lg);
-    opacity: 0.9;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    text-transform: lowercase;
+    color: var(--color-surface);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* ==================== NAVIGATION BLOCK ==================== */
@@ -119,7 +117,7 @@ nav {
     flex-wrap: wrap;
     gap: var(--spacing-sm);
     padding: var(--spacing-md) var(--spacing-sm);
-    background: var(--color-background);
+    background: var(--color-secondary);
     box-shadow: var(--shadow-sm);
     transition: var(--transition-base);
 }
@@ -130,50 +128,60 @@ nav {
 
 /* Filter Button Component */
 .filter-btn {
-    padding: 0.75rem var(--spacing-md);
-    border: 2px solid var(--color-primary);
+    padding: 0.6rem 2rem;
+    border: 1px solid var(--color-primary);
     background: var(--color-surface);
-    color: var(--color-primary);
+    color: var(--color-primary-dark);
     border-radius: var(--radius-pill);
     cursor: pointer;
-    font-size: var(--font-size-base);
+    font-size: 0.85rem;
     font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     transition: var(--transition-base);
     font-family: inherit;
 }
 
-.filter-btn--sub {
-    border-color: var(--color-primary-dark);
-    color: var(--color-primary-dark);
-    background: var(--color-surface);
-}
-
-.filter-btn--sub:hover {
-    background: var(--color-primary-dark);
-    color: var(--color-text-light);
-}
-
-.filter-btn--sub.active {
-    background: var(--color-primary-dark);
-    color: var(--color-text-light);
-}
-
 .filter-btn:hover {
     background: var(--color-primary);
-    color: var(--color-text-light);
+    color: var(--color-surface);
+    border-color: var(--color-primary);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-primary);
+    box-shadow: 0 4px 12px rgba(232, 160, 176, 0.4);
 }
 
 .filter-btn--active,
 .filter-btn.active {
     background: var(--color-primary);
-    color: var(--color-text-light);
+    color: var(--color-surface);
+    border-color: var(--color-primary);
 }
 
 .filter-btn:focus {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
+}
+
+/* Subcategory buttons - slightly smaller */
+.filter-btn--sub {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.8rem;
+    border-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    background: var(--color-surface);
+}
+
+.filter-btn--sub:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    border-color: var(--color-primary-light);
+    box-shadow: 0 4px 12px rgba(232, 160, 176, 0.3);
+}
+
+.filter-btn--sub.active {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    border-color: var(--color-primary);
 }
 
 /* ==================== MAIN CONTENT BLOCK ==================== */
