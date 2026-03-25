@@ -279,7 +279,7 @@ header {
     padding: var(--spacing-lg);
     position: relative;
     background:
-        linear-gradient(rgba(239, 224, 204, 0.72), rgba(239, 224, 204, 0.72)),
+        linear-gradient(rgba(239, 224, 204, 0.55), rgba(239, 224, 204, 0.55)),
         url('../images/fondo.jpg') center center / cover no-repeat;
 }
 
