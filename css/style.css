@@ -354,8 +354,8 @@ main > * {
 
 .footer, footer {
     grid-area: footer;
-    background: var(--color-footer-bg);
-    color: var(--color-footer-text);
+    background: transparent;
+    color: var(--color-text-muted);
     text-align: center;
     padding: var(--spacing-md);
     font-family: var(--font-sans);
