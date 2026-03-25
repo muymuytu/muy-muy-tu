@@ -134,7 +134,7 @@ header h1 {
     text-align: left;
     font-family: var(--font-serif);
     font-size: 0.95rem;
-    font-style: italic;
+    font-style: normal;
     font-weight: 400;
     color: var(--color-text-muted);
     cursor: pointer;
