@@ -6,16 +6,16 @@
 /* ==================== DESIGN TOKENS ==================== */
 
 :root {
-    --color-bg:           #ffffff;
-    --color-surface:      #ffffff;
-    --color-bg-soft:      #f6f4f1;
-    --color-border:       #e8e4df;
-    --color-text:         #171717;
-    --color-text-muted:   #8a8a8a;
-    --color-text-hover:   #504444;
-    --color-accent:       #171717;
-    --color-footer-bg:    #171717;
-    --color-footer-text:  rgba(255,255,255,0.45);
+    --color-bg:           #f5ede0;
+    --color-surface:      #faf4ec;
+    --color-bg-soft:      #ede0cc;
+    --color-border:       #d9c9b0;
+    --color-text:         #7a3b1e;
+    --color-text-muted:   #b8865a;
+    --color-text-hover:   #5a2a10;
+    --color-accent:       #7a3b1e;
+    --color-footer-bg:    #3d1f0d;
+    --color-footer-text:  rgba(255,255,255,0.5);
 
     --font-serif:   'Plus Jakarta Sans', 'Segoe UI', sans-serif;
     --font-sans:    'Plus Jakarta Sans', 'Segoe UI', sans-serif;
@@ -71,22 +71,17 @@ header {
     min-height: 80px;
 }
 
-.header__title,
-header h1 {
-    font-family: var(--font-sans);
-    font-size: 1.5rem;
-    font-weight: 300;
-    letter-spacing: 0.55em;
-    text-transform: lowercase;
-    color: var(--color-text);
+.header__logo-link {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    text-decoration: none;
 }
 
-.header__flamingo {
-    font-size: 1.3rem;
-    line-height: 1;
+.header__logo {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
 }
 
 .header__instagram {
@@ -138,7 +133,8 @@ header h1 {
     font-weight: 400;
     color: var(--color-text-muted);
     cursor: pointer;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     transition: var(--transition);
     display: flex;
     align-items: center;
