@@ -94,7 +94,7 @@ header {
     font-family: var(--font-sans);
     font-size: clamp(2.2rem, 5vw, 4rem);
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-text);
     margin: 0;
@@ -114,11 +114,11 @@ header {
     font-family: var(--font-sans);
     font-size: 0.7rem;
     font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    text-transform: none;
     color: var(--color-text-muted);
     align-self: flex-end;
-    margin-top: 0.3rem;
+    margin-top: 0.55rem;
 }
 
 .header__instagram {
