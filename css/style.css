@@ -277,6 +277,10 @@ header {
 .main, main {
     grid-area: main;
     padding: var(--spacing-lg);
+    position: relative;
+    background:
+        linear-gradient(rgba(239, 224, 204, 0.72), rgba(239, 224, 204, 0.72)),
+        url('../images/fondo.jpg') center center / cover no-repeat;
 }
 
 /* ==================== PRODUCTS GRID ==================== */
