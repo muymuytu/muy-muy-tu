@@ -314,7 +314,7 @@ main > * {
 /* ==================== PRODUCT CARD ==================== */
 
 .product-card {
-    background: var(--color-surface);
+    background: transparent;
     overflow: hidden;
     cursor: pointer;
     transition: var(--transition);
@@ -333,10 +333,11 @@ main > * {
     width: 100%;
     aspect-ratio: 3 / 4;
     overflow: hidden;
-    background: var(--color-bg-soft);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 4px;
 }
 
 .product-card__image img,
