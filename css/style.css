@@ -80,6 +80,7 @@ body {
 
 .header,
 header {
+    position: relative;
     background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
     color: var(--color-surface);
     text-align: center;
@@ -95,6 +96,32 @@ header h1 {
     text-transform: lowercase;
     color: var(--color-surface);
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.header__flamingo {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.header__instagram {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    color: var(--color-surface);
+    font-size: 1.8rem;
+    transition: var(--transition-base);
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+.header__instagram:hover {
+    opacity: 1;
+    transform: scale(1.2);
+    color: var(--color-surface);
 }
 
 /* ==================== NAVIGATION BLOCK ==================== */
