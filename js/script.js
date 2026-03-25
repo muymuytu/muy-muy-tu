@@ -1,17 +1,17 @@
 /**
- * Catálogo de Productos - Arquitectura Limpia
+ * Catálogo de Productos - Arquitectura Limpia con Navegación Jerárquica
  * Principios SOLID aplicados
  */
 
 // ==================== DOMAIN LAYER ====================
 
 /**
- * Value Object - Representa una categoría de filtro
+ * Value Object - Representa una categoría principal
  */
-class FilterCategory {
+class Category {
     constructor(value) {
         if (!value || typeof value !== 'string') {
-            throw new Error('Filter category must be a non-empty string');
+            throw new Error('Category must be a non-empty string');
         }
         this._value = value.toLowerCase();
     }
@@ -20,12 +20,32 @@ class FilterCategory {
         return this._value;
     }
 
-    isAll() {
-        return this._value === 'all';
+    hasSubcategories() {
+        return this._value === 'dorado';
     }
 
-    matches(category) {
-        return this.isAll() || this._value === category.toLowerCase();
+    matches(categoryValue) {
+        return this._value === categoryValue.toLowerCase();
+    }
+}
+
+/**
+ * Value Object - Representa una subcategoría
+ */
+class Subcategory {
+    constructor(value) {
+        if (!value || typeof value !== 'string') {
+            throw new Error('Subcategory must be a non-empty string');
+        }
+        this._value = value.toLowerCase();
+    }
+
+    get value() {
+        return this._value;
+    }
+
+    matches(subcategoryValue) {
+        return this._value === subcategoryValue.toLowerCase();
     }
 }
 
@@ -39,18 +59,25 @@ class Product {
         }
         this._element = element;
         this._category = element.dataset.category || '';
+        this._subcategory = element.dataset.subcategory || '';
     }
 
     get category() {
         return this._category;
     }
 
-    get element() {
-        return this._element;
+    get subcategory() {
+        return this._subcategory;
     }
 
-    matchesFilter(filterCategory) {
-        return filterCategory.matches(this._category);
+    matchesFilter(category, subcategory = null) {
+        const categoryMatches = category.matches(this._category);
+
+        if (subcategory) {
+            return categoryMatches && subcategory.matches(this._subcategory);
+        }
+
+        return categoryMatches;
     }
 
     show() {
@@ -60,25 +87,49 @@ class Product {
 
     hide() {
         this._element.classList.add('hidden');
+        this._element.style.display = 'none';
     }
 }
 
 // ==================== APPLICATION LAYER ====================
 
 /**
- * Use Case - Filtrar productos por categoría
- * Single Responsibility: Solo se encarga de la lógica de filtrado
+ * Use Case - Mostrar submenú para categorías con subcategorías
+ */
+class ShowSubmenuUseCase {
+    constructor(submenuRepository) {
+        this._submenuRepository = submenuRepository;
+    }
+
+    execute(category) {
+        const allSubmenus = this._submenuRepository.getAll();
+
+        // Ocultar todos los submenús
+        allSubmenus.forEach(submenu => submenu.hide());
+
+        // Mostrar submenú si la categoría tiene subcategorías
+        if (category.hasSubcategories()) {
+            const submenu = this._submenuRepository.getByCategory(category.value);
+            if (submenu) {
+                submenu.show();
+            }
+        }
+    }
+}
+
+/**
+ * Use Case - Filtrar productos por categoría y subcategoría
  */
 class FilterProductsUseCase {
     constructor(productRepository) {
         this._productRepository = productRepository;
     }
 
-    execute(filterCategory) {
+    execute(category, subcategory = null) {
         const products = this._productRepository.getAll();
 
         products.forEach(product => {
-            if (product.matchesFilter(filterCategory)) {
+            if (product.matchesFilter(category, subcategory)) {
                 product.show();
             } else {
                 product.hide();
@@ -88,13 +139,32 @@ class FilterProductsUseCase {
 }
 
 /**
- * Use Case - Gestionar estado activo de filtros
- * Single Responsibility: Solo gestiona el estado visual de los botones
+ * Use Case - Gestionar estado activo de botones
  */
-class ManageFilterStateUseCase {
-    execute(buttons, activeButton) {
-        buttons.forEach(button => button.classList.remove('active'));
-        activeButton.classList.add('active');
+class ManageButtonStateUseCase {
+    execute(buttons, activeButton, scope = 'main') {
+        const relevantButtons = scope === 'sub'
+            ? buttons.filter(btn => btn.classList.contains('filter-btn--sub'))
+            : buttons.filter(btn => !btn.classList.contains('filter-btn--sub'));
+
+        relevantButtons.forEach(button => button.classList.remove('active'));
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
+    }
+}
+
+/**
+ * Use Case - Ocultar todos los productos
+ */
+class HideAllProductsUseCase {
+    constructor(productRepository) {
+        this._productRepository = productRepository;
+    }
+
+    execute() {
+        const products = this._productRepository.getAll();
+        products.forEach(product => product.hide());
     }
 }
 
@@ -102,7 +172,6 @@ class ManageFilterStateUseCase {
 
 /**
  * Repository - Gestiona la colección de productos
- * Single Responsibility: Encapsula el acceso a los productos del DOM
  */
 class ProductRepository {
     constructor(selector = '.product-card') {
@@ -129,7 +198,7 @@ class ProductRepository {
 }
 
 /**
- * Repository - Gestiona la colección de botones de filtro
+ * Repository - Gestiona botones de filtro principales
  */
 class FilterButtonRepository {
     constructor(selector = '.filter-btn') {
@@ -139,68 +208,161 @@ class FilterButtonRepository {
     getAll() {
         return Array.from(document.querySelectorAll(this._selector));
     }
+
+    getMainButtons() {
+        return this.getAll().filter(btn => !btn.classList.contains('filter-btn--sub'));
+    }
+
+    getSubButtons() {
+        return this.getAll().filter(btn => btn.classList.contains('filter-btn--sub'));
+    }
+}
+
+/**
+ * Repository - Gestiona submenús
+ */
+class SubmenuRepository {
+    constructor(selector = '.submenu') {
+        this._selector = selector;
+    }
+
+    getAll() {
+        const elements = document.querySelectorAll(this._selector);
+        return Array.from(elements).map(el => ({
+            element: el,
+            category: el.id.replace('submenu-', ''),
+            show: () => el.classList.remove('submenu--hidden'),
+            hide: () => el.classList.add('submenu--hidden')
+        }));
+    }
+
+    getByCategory(categoryValue) {
+        const submenus = this.getAll();
+        return submenus.find(submenu => submenu.category === categoryValue);
+    }
 }
 
 // ==================== PRESENTATION LAYER ====================
 
 /**
- * Controller - Maneja la interacción del usuario con los filtros
- * Dependency Inversion: Depende de abstracciones (use cases) no de implementaciones
+ * Controller - Maneja navegación jerárquica
  */
-class FilterController {
+class HierarchicalNavigationController {
     constructor(
+        showSubmenuUseCase,
         filterProductsUseCase,
-        manageFilterStateUseCase,
-        buttonRepository
+        hideAllProductsUseCase,
+        manageButtonStateUseCase,
+        buttonRepository,
+        submenuRepository
     ) {
+        this._showSubmenuUseCase = showSubmenuUseCase;
         this._filterProductsUseCase = filterProductsUseCase;
-        this._manageFilterStateUseCase = manageFilterStateUseCase;
+        this._hideAllProductsUseCase = hideAllProductsUseCase;
+        this._manageButtonStateUseCase = manageButtonStateUseCase;
         this._buttonRepository = buttonRepository;
+        this._submenuRepository = submenuRepository;
+        this._currentCategory = null;
     }
 
     initialize() {
-        const buttons = this._buttonRepository.getAll();
+        this._attachMainCategoryListeners();
+        this._attachSubcategoryListeners();
+        this._hideAllProductsUseCase.execute(); // Ocultar todos al inicio
+    }
 
-        buttons.forEach(button => {
+    _attachMainCategoryListeners() {
+        const mainButtons = this._buttonRepository.getMainButtons();
+
+        mainButtons.forEach(button => {
             button.addEventListener('click', (event) => {
-                this._handleFilterClick(event.currentTarget, buttons);
+                this._handleMainCategoryClick(event.currentTarget, mainButtons);
             });
         });
     }
 
-    _handleFilterClick(clickedButton, allButtons) {
-        try {
-            const filterValue = clickedButton.dataset.filter;
-            const filterCategory = new FilterCategory(filterValue);
+    _attachSubcategoryListeners() {
+        const subButtons = this._buttonRepository.getSubButtons();
 
-            this._manageFilterStateUseCase.execute(allButtons, clickedButton);
-            this._filterProductsUseCase.execute(filterCategory);
+        subButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                this._handleSubcategoryClick(event.currentTarget, subButtons);
+            });
+        });
+    }
+
+    _handleMainCategoryClick(clickedButton, allButtons) {
+        try {
+            const categoryValue = clickedButton.dataset.filter;
+            const category = new Category(categoryValue);
+
+            this._currentCategory = category;
+            this._manageButtonStateUseCase.execute(allButtons, clickedButton, 'main');
+
+            if (category.hasSubcategories()) {
+                // Mostrar submenú y ocultar productos
+                this._showSubmenuUseCase.execute(category);
+                this._hideAllProductsUseCase.execute();
+
+                // Limpiar estado de botones de subcategoría
+                const subButtons = this._buttonRepository.getSubButtons();
+                this._manageButtonStateUseCase.execute(subButtons, null, 'sub');
+            } else {
+                // Ocultar todos los submenús
+                const allSubmenus = this._submenuRepository.getAll();
+                allSubmenus.forEach(submenu => submenu.hide());
+
+                // Mostrar productos de esta categoría
+                this._filterProductsUseCase.execute(category);
+            }
         } catch (error) {
-            console.error('Error filtering products:', error);
+            console.error('Error handling main category click:', error);
+        }
+    }
+
+    _handleSubcategoryClick(clickedButton, allButtons) {
+        try {
+            const categoryValue = clickedButton.dataset.category;
+            const subcategoryValue = clickedButton.dataset.subcategory;
+
+            const category = new Category(categoryValue);
+            const subcategory = new Subcategory(subcategoryValue);
+
+            this._manageButtonStateUseCase.execute(allButtons, clickedButton, 'sub');
+            this._filterProductsUseCase.execute(category, subcategory);
+        } catch (error) {
+            console.error('Error handling subcategory click:', error);
         }
     }
 }
 
 /**
  * Application Bootstrap - Dependency Injection Container
- * Open/Closed Principle: Abierto para extensión, cerrado para modificación
  */
 class CatalogApplication {
     static initialize() {
-        // Dependency Injection - Inyección de dependencias
+        // Repositories
         const productRepository = new ProductRepository();
         const buttonRepository = new FilterButtonRepository();
+        const submenuRepository = new SubmenuRepository();
 
+        // Use Cases
+        const showSubmenuUseCase = new ShowSubmenuUseCase(submenuRepository);
         const filterProductsUseCase = new FilterProductsUseCase(productRepository);
-        const manageFilterStateUseCase = new ManageFilterStateUseCase();
+        const hideAllProductsUseCase = new HideAllProductsUseCase(productRepository);
+        const manageButtonStateUseCase = new ManageButtonStateUseCase();
 
-        const filterController = new FilterController(
+        // Controller
+        const navigationController = new HierarchicalNavigationController(
+            showSubmenuUseCase,
             filterProductsUseCase,
-            manageFilterStateUseCase,
-            buttonRepository
+            hideAllProductsUseCase,
+            manageButtonStateUseCase,
+            buttonRepository,
+            submenuRepository
         );
 
-        filterController.initialize();
+        navigationController.initialize();
     }
 }
 

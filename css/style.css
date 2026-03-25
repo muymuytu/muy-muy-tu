@@ -112,6 +112,22 @@ nav {
     box-shadow: var(--shadow-sm);
 }
 
+/* Submenu Component */
+.submenu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-sm);
+    background: var(--color-background);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-base);
+}
+
+.submenu--hidden {
+    display: none;
+}
+
 /* Filter Button Component */
 .filter-btn {
     padding: 0.75rem var(--spacing-md);
@@ -124,6 +140,22 @@ nav {
     font-weight: var(--font-weight-semibold);
     transition: var(--transition-base);
     font-family: inherit;
+}
+
+.filter-btn--sub {
+    border-color: var(--color-primary-dark);
+    color: var(--color-primary-dark);
+    background: var(--color-surface);
+}
+
+.filter-btn--sub:hover {
+    background: var(--color-primary-dark);
+    color: var(--color-text-light);
+}
+
+.filter-btn--sub.active {
+    background: var(--color-primary-dark);
+    color: var(--color-text-light);
 }
 
 .filter-btn:hover {

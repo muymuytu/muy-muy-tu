@@ -3,83 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo de joyería muy-muy-tu - Pendientes, collares y anillos dorados y plateados">
+    <meta name="keywords" content="joyería, pendientes, collares, anillos, dorado, plateado">
+    <meta name="author" content="muy-muy-tu">
     <title>muy-muy-tu - Catálogo de Joyería</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>✨ muy-muy-tu ✨</h1>
-        <p class="subtitle">Joyería con estilo</p>
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <h1 class="header__title">✨ muy-muy-tu ✨</h1>
+        <p class="header__subtitle subtitle">Joyería con estilo</p>
     </header>
 
-    <nav>
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="dorado">Dorado</button>
-        <button class="filter-btn" data-filter="plateado">Plateado</button>
-        <button class="filter-btn" data-filter="collares">Collares</button>
-        <button class="filter-btn" data-filter="anillos">Anillos</button>
+    <!-- Navigation Component -->
+    <nav class="nav" role="navigation" aria-label="Filtros de productos">
+        <button class="filter-btn"
+                data-filter="dorado"
+                aria-pressed="false"
+                aria-label="Ver categoría Dorado">
+            Dorado
+        </button>
+        <button class="filter-btn"
+                data-filter="plateado"
+                aria-pressed="false"
+                aria-label="Ver categoría Plateado">
+            Plateado
+        </button>
+        <button class="filter-btn"
+                data-filter="collares"
+                aria-pressed="false"
+                aria-label="Ver categoría Collares">
+            Collares
+        </button>
+        <button class="filter-btn"
+                data-filter="anillos"
+                aria-pressed="false"
+                aria-label="Ver categoría Anillos">
+            Anillos
+        </button>
     </nav>
 
-    <main>
-        <section class="products-grid">
-            <!-- Pendientes Dorados Pequeños -->
-            <div class="product-card" data-category="dorado">
-                <div class="product-image">
-                    <img src="images/Dorado/Pequeos/Pequeos1.jpg" alt="Pendientes Dorados 1">
-                </div>
-                <div class="product-info">
-                    <h3>Pendientes Dorados</h3>
-                    <p class="category">Dorado · Pequeños</p>
-                </div>
-            </div>
+    <!-- Submenu for Dorado (initially hidden) -->
+    <nav class="submenu submenu--hidden" id="submenu-dorado" role="navigation" aria-label="Subcategorías de Dorado">
+        <button class="filter-btn filter-btn--sub"
+                data-category="dorado"
+                data-subcategory="pequeños"
+                aria-label="Ver pendientes pequeños">
+            Pequeños
+        </button>
+        <button class="filter-btn filter-btn--sub"
+                data-category="dorado"
+                data-subcategory="grandes"
+                aria-label="Ver pendientes grandes">
+            Grandes
+        </button>
+        <button class="filter-btn filter-btn--sub"
+                data-category="dorado"
+                data-subcategory="tuerca"
+                aria-label="Ver pendientes tipo tuerca">
+            Tuerca
+        </button>
+    </nav>
 
-            <div class="product-card" data-category="dorado">
-                <div class="product-image">
-                    <img src="images/Dorado/Pequeos/Pequeos2.jpg" alt="Pendientes Dorados 2">
+    <!-- Main Content -->
+    <main class="main" role="main">
+        <!-- Products Grid Component -->
+        <section class="products-grid" aria-label="Catálogo de productos">
+            <!-- Product Card: Pendientes Dorados 1 -->
+            <article class="product-card hidden" data-category="dorado" data-subcategory="pequeños" role="article">
+                <figure class="product-card__image product-image">
+                    <img src="images/Dorado/Pequeos/Pequeos1.jpg"
+                         alt="Pendientes Dorados estilo 1"
+                         loading="lazy"
+                         width="280"
+                         height="300">
+                </figure>
+                <div class="product-card__info product-info">
+                    <h3 class="product-card__title">Pendientes Dorados</h3>
+                    <p class="product-card__category category">Dorado · Pequeños</p>
                 </div>
-                <div class="product-info">
-                    <h3>Pendientes Dorados</h3>
-                    <p class="category">Dorado · Pequeños</p>
-                </div>
-            </div>
+            </article>
 
-            <div class="product-card" data-category="dorado">
-                <div class="product-image">
-                    <img src="images/Dorado/Pequeos/Pequeos3.jpg" alt="Pendientes Dorados 3">
+            <!-- Product Card: Pendientes Dorados 2 -->
+            <article class="product-card hidden" data-category="dorado" data-subcategory="pequeños" role="article">
+                <figure class="product-card__image product-image">
+                    <img src="images/Dorado/Pequeos/Pequeos2.jpg"
+                         alt="Pendientes Dorados estilo 2"
+                         loading="lazy"
+                         width="280"
+                         height="300">
+                </figure>
+                <div class="product-card__info product-info">
+                    <h3 class="product-card__title">Pendientes Dorados</h3>
+                    <p class="product-card__category category">Dorado · Pequeños</p>
                 </div>
-                <div class="product-info">
-                    <h3>Pendientes Dorados</h3>
-                    <p class="category">Dorado · Pequeños</p>
-                </div>
-            </div>
+            </article>
 
-            <div class="product-card" data-category="dorado">
-                <div class="product-image">
-                    <img src="images/Dorado/Pequeos/Pequeos4.jpg" alt="Pendientes Dorados 4">
+            <!-- Product Card: Pendientes Dorados 3 -->
+            <article class="product-card hidden" data-category="dorado" data-subcategory="pequeños" role="article">
+                <figure class="product-card__image product-image">
+                    <img src="images/Dorado/Pequeos/Pequeos3.jpg"
+                         alt="Pendientes Dorados estilo 3"
+                         loading="lazy"
+                         width="280"
+                         height="300">
+                </figure>
+                <div class="product-card__info product-info">
+                    <h3 class="product-card__title">Pendientes Dorados</h3>
+                    <p class="product-card__category category">Dorado · Pequeños</p>
                 </div>
-                <div class="product-info">
-                    <h3>Pendientes Dorados</h3>
-                    <p class="category">Dorado · Pequeños</p>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="dorado">
-                <div class="product-image">
-                    <img src="images/Dorado/Pequeos/Earcuff.jpg" alt="Earcuff Dorado">
-                </div>
-                <div class="product-info">
-                    <h3>Earcuff</h3>
-                    <p class="category">Dorado · Pequeños</p>
-                </div>
-            </div>
+            </article>
         </section>
     </main>
 
-    <footer>
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
         <p>&copy; 2026 muy-muy-tu · Joyería con estilo</p>
     </footer>
 
-    <script src="js/script.js"></script>
+    <!-- JavaScript Module -->
+    <script src="js/script.js" defer></script>
 </body>
 </html>
 
