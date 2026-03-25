@@ -283,7 +283,7 @@ header {
         linear-gradient(rgba(239, 224, 204, 0.15), rgba(239, 224, 204, 0.15)),
         url('../images/fondo.jpg');
     background-size: 75%;
-    background-position: center 5%;
+    background-position: center -20%;
     background-repeat: no-repeat;
 }
 
