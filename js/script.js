@@ -109,10 +109,17 @@ class CatalogController {
         const mainBtns = this._buttons.getMainButtons();
         mainBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                // Toggle: si ya está activo, deseleccionar y ocultar
+                if (btn.classList.contains('active')) {
+                    this._btnState.execute(mainBtns, null);
+                    this._btnState.execute(this._buttons.getSubButtons(), null);
+                    this._hideAll.execute();
+                    return;
+                }
+
                 const category = new Category(btn.dataset.filter);
                 this._btnState.execute(mainBtns, btn);
 
-                // Si NO tiene subcategorías filtra directo; si tiene, espera subcategoría
                 const hasSubmenu = btn.closest('.side-menu__item--has-submenu');
                 if (!hasSubmenu) {
                     this._btnState.execute(this._buttons.getSubButtons(), null);
@@ -129,6 +136,13 @@ class CatalogController {
         const subBtns = this._buttons.getSubButtons();
         subBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                // Toggle: si ya está activo, deseleccionar y ocultar
+                if (btn.classList.contains('active')) {
+                    this._btnState.execute(subBtns, null);
+                    this._hideAll.execute();
+                    return;
+                }
+
                 const category    = new Category(btn.dataset.category);
                 const subcategory = new Subcategory(btn.dataset.subcategory);
                 this._btnState.execute(subBtns, btn);
