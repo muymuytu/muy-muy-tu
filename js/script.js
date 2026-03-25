@@ -1,5 +1,5 @@
 /**
- * Catálogo de Productos - Arquitectura Limpia
+ * Catálogo de Productos - Arquitectura Limpia v2
  * Principios SOLID aplicados
  * El submenú se muestra/oculta por CSS (hover) — JS solo gestiona filtrado de productos
  */
