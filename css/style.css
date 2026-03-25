@@ -280,7 +280,8 @@ header {
     position: relative;
     background:
         linear-gradient(rgba(239, 224, 204, 0.15), rgba(239, 224, 204, 0.15)),
-        url('../images/fondo.jpg') center 20% / cover no-repeat;
+        url('../images/fondo.jpg') center top / contain no-repeat;
+    background-color: var(--color-bg);
 }
 
 /* ==================== PRODUCTS GRID ==================== */
