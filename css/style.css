@@ -1,119 +1,91 @@
 /**
- * Catálogo muy-muy-tu - Arquitectura CSS Modular
- * Metodología: BEM (Block Element Modifier)
- * Principios: DRY, Separation of Concerns, Mobile First
+ * Catálogo muymuytú - Estilo Malandra
+ * Minimalista · Serif · Editorial
  */
 
 /* ==================== DESIGN TOKENS ==================== */
 
 :root {
-    /* Color Palette - Modern & Cool */
-    --color-primary: #b8956a;          /* dorado tostado */
-    --color-primary-dark: #8a6a48;     /* dorado oscuro */
-    --color-primary-light: #e8d5c0;    /* crema cálido */
-    --color-secondary: #f9f7f4;        /* blanco roto */
-    --color-secondary-dark: #ede8e2;   /* crema suave */
-    --color-accent: #2c2c2c;           /* casi negro */
-    --color-text-primary: #1a1a1a;
-    --color-text-secondary: #777;
-    --color-text-light: #fff;
-    --color-background: #f9f7f4;
-    --color-surface: #fff;
-    --color-footer: #1a1a1a;
+    --color-bg:           #ffffff;
+    --color-surface:      #ffffff;
+    --color-bg-soft:      #f6f4f1;
+    --color-border:       #e8e4df;
+    --color-text:         #171717;
+    --color-text-muted:   #8a8a8a;
+    --color-text-hover:   #504444;
+    --color-accent:       #171717;
+    --color-footer-bg:    #171717;
+    --color-footer-text:  rgba(255,255,255,0.45);
 
-    /* Spacing System (8px grid) */
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 1.5rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 3rem;
+    --font-serif:   'Cormorant Garamond', Georgia, serif;
+    --font-sans:    'Jost', 'Segoe UI', sans-serif;
 
-    /* Typography */
-    --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --font-size-sm: 0.8rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.2rem;
-    --font-size-xl: 1.3rem;
-    --font-size-2xl: 2rem;
-    --font-size-3xl: 2.8rem;
-    --line-height-base: 1.6;
-    --font-weight-normal: 400;
-    --font-weight-semibold: 600;
+    --spacing-xs:  0.5rem;
+    --spacing-sm:  1rem;
+    --spacing-md:  1.5rem;
+    --spacing-lg:  2.5rem;
+    --spacing-xl:  4rem;
 
-    /* Shadows */
-    --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.07);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
-    --shadow-primary: 0 4px 12px rgba(184, 149, 106, 0.35);
-
-    /* Border Radius */
-    --radius-sm: 12px;
-    --radius-pill: 999px;
-
-    /* Transitions */
-    --transition-base: all 0.25s ease;
-
-    /* Layout */
-    --container-max-width: 1400px;
-    --grid-gap: 1.5rem;
-    --grid-min-column: 260px;
+    --transition: all 0.2s ease;
+    --radius-sm: 3px;
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.13);
 }
 
-/* ==================== BASE STYLES ==================== */
+/* ==================== BASE ==================== */
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: var(--font-family-base);
-    line-height: var(--line-height-base);
-    background: var(--color-secondary);
-    min-height: 100vh;
-    color: var(--color-text-primary);
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.6;
+    background: var(--color-bg);
+    color: var(--color-text);
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 220px 1fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
         "header  header"
         "sidebar main"
         "footer  footer";
+    min-height: 100vh;
 }
 
-/* ==================== HEADER BLOCK ==================== */
+/* ==================== HEADER ==================== */
 
 .header,
 header {
     grid-area: header;
     position: relative;
-    background: var(--color-accent);
-    color: var(--color-text-light);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: var(--spacing-md) var(--spacing-xl);
-    min-height: 90px;
+    min-height: 80px;
 }
 
 .header__title,
 header h1 {
-    font-size: var(--font-size-3xl);
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
     font-weight: 300;
-    letter-spacing: 0.35em;
+    letter-spacing: 0.55em;
     text-transform: lowercase;
-    color: var(--color-text-light);
+    color: var(--color-text);
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    margin: 0;
+    gap: 0.5rem;
 }
 
 .header__flamingo {
-    font-size: 2rem;
+    font-size: 1.3rem;
     line-height: 1;
 }
 
@@ -122,62 +94,142 @@ header h1 {
     top: 50%;
     right: var(--spacing-lg);
     transform: translateY(-50%);
-    color: var(--color-text-light);
-    font-size: 1.6rem;
+    color: var(--color-text-muted);
+    font-size: 1.3rem;
     text-decoration: none;
-    opacity: 0.75;
-    transition: var(--transition-base);
+    transition: var(--transition);
 }
 
 .header__instagram:hover {
-    opacity: 1;
-    transform: translateY(-50%) scale(1.15);
+    color: var(--color-text);
+    transform: translateY(-50%) scale(1.1);
 }
 
-/* ==================== NAVIGATION BLOCK ==================== */
+/* ==================== SIDE MENU ==================== */
 
 .side-menu {
     grid-area: sidebar;
     position: sticky;
     top: 0;
     height: 100vh;
-    padding: var(--spacing-xl) var(--spacing-md);
-    background: var(--color-surface);
-    border-right: 1px solid var(--color-secondary-dark);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    background: var(--color-bg);
+    border-right: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 2px;
 }
 
 .side-menu__item {
     position: relative;
 }
 
-.side-menu__btn {
+/* ==================== FILTER BUTTONS - ESTILO TEXTO PLANO ==================== */
+
+.filter-btn {
+    background: none;
+    border: none;
+    padding: 0.45rem 0;
     width: 100%;
     text-align: left;
-    padding: 0.5rem 1rem;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
 }
 
-/* Submenu */
+.filter-btn::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 1px;
+    background: var(--color-text);
+    transition: width 0.2s ease;
+    flex-shrink: 0;
+}
+
+.filter-btn:hover {
+    color: var(--color-text);
+    transform: none;
+    box-shadow: none;
+}
+
+.filter-btn:hover::before {
+    width: 14px;
+}
+
+.filter-btn.active {
+    color: var(--color-text);
+    font-weight: 400;
+}
+
+.filter-btn.active::before {
+    width: 14px;
+}
+
+.filter-btn:focus {
+    outline: none;
+    color: var(--color-text);
+}
+
+/* Subcategorías */
+.filter-btn--sub {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    padding: 0.35rem 0;
+    width: 100%;
+    text-align: left;
+    letter-spacing: 0.03em;
+}
+
+.filter-btn--sub::before {
+    background: var(--color-text-muted);
+}
+
+.filter-btn--sub:hover {
+    color: var(--color-text);
+}
+
+.filter-btn--sub:hover::before {
+    width: 10px;
+}
+
+.filter-btn--sub.active {
+    color: var(--color-text);
+}
+
+.filter-btn--sub.active::before {
+    width: 10px;
+    background: var(--color-text);
+}
+
+/* Submenu flotante */
 .side-menu__submenu {
     position: absolute;
-    left: calc(100% + 10px);
+    left: calc(100% + 16px);
     top: 0;
-    min-width: 150px;
+    min-width: 140px;
     background: var(--color-surface);
-    border: 1px solid var(--color-secondary-dark);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-md);
-    padding: 8px;
+    padding: var(--spacing-sm);
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
     z-index: 100;
     opacity: 0;
     pointer-events: none;
     transform: translateX(-6px);
-    transition: var(--transition-base);
+    transition: var(--transition);
 }
 
 .side-menu__item--has-submenu:hover .side-menu__submenu,
@@ -187,98 +239,32 @@ header h1 {
     transform: translateX(0);
 }
 
-/* ==================== FILTER BUTTONS ==================== */
+/* ==================== MAIN ==================== */
 
-.filter-btn {
-    border: 1px solid var(--color-secondary-dark);
-    background: transparent;
-    color: var(--color-text-secondary);
-    border-radius: var(--radius-pill);
-    cursor: pointer;
-    font-size: var(--font-size-sm);
-    font-style: italic;
-    font-weight: var(--font-weight-normal);
-    letter-spacing: 0.03em;
-    text-transform: capitalize;
-    transition: var(--transition-base);
-    font-family: inherit;
-    padding: 0.4rem 1rem;
-    white-space: nowrap;
-}
-
-.filter-btn:hover {
-    background: var(--color-accent);
-    color: var(--color-text-light);
-    border-color: var(--color-accent);
-    transform: translateX(3px);
-    box-shadow: none;
-}
-
-.filter-btn.active {
-    background: var(--color-accent);
-    color: var(--color-text-light);
-    border-color: var(--color-accent);
-}
-
-.filter-btn:focus {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-}
-
-/* Subcategory buttons */
-.filter-btn--sub {
-    font-size: 0.75rem;
-    padding: 0.35rem 0.9rem;
-    color: var(--color-text-secondary);
-    border-color: var(--color-secondary-dark);
-    width: 100%;
-    text-align: left;
-}
-
-.filter-btn--sub:hover {
-    background: var(--color-primary-light);
-    color: var(--color-primary-dark);
-    border-color: var(--color-primary-light);
-    transform: translateX(4px);
-    box-shadow: none;
-}
-
-.filter-btn--sub.active {
-    background: var(--color-primary-light);
-    color: var(--color-primary-dark);
-    border-color: var(--color-primary);
-}
-
-/* ==================== MAIN CONTENT BLOCK ==================== */
-
-.main,
-main {
+.main, main {
     grid-area: main;
     padding: var(--spacing-lg);
 }
 
-/* ==================== PRODUCTS GRID BLOCK ==================== */
+/* ==================== PRODUCTS GRID ==================== */
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(var(--grid-min-column), 1fr));
-    gap: var(--grid-gap);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--spacing-md);
 }
 
-/* ==================== PRODUCT CARD COMPONENT ==================== */
+/* ==================== PRODUCT CARD ==================== */
 
 .product-card {
     background: var(--color-surface);
-    border-radius: var(--radius-sm);
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-base);
     cursor: pointer;
+    transition: var(--transition);
 }
 
 .product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
 }
 
 .product-card.hidden {
@@ -288,9 +274,9 @@ main {
 .product-card__image,
 .product-image {
     width: 100%;
-    height: 280px;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
-    background: var(--color-secondary);
+    background: var(--color-bg-soft);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -301,53 +287,51 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
 }
 
 .product-card:hover .product-image img {
-    transform: scale(1.06);
+    transform: scale(1.04);
 }
 
-/* ==================== FOOTER BLOCK ==================== */
+/* ==================== FOOTER ==================== */
 
-.footer,
-footer {
+.footer, footer {
     grid-area: footer;
-    background: var(--color-footer);
-    color: rgba(255,255,255,0.5);
+    background: var(--color-footer-bg);
+    color: var(--color-footer-text);
     text-align: center;
     padding: var(--spacing-md);
-    font-size: var(--font-size-sm);
-    letter-spacing: 0.08em;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
 }
 
-/* ==================== UTILITY CLASSES ==================== */
+/* ==================== UTILITY ==================== */
 
 .u-hidden { display: none !important; }
 
 .u-sr-only {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
     overflow: hidden;
     clip: rect(0,0,0,0);
     white-space: nowrap;
     border-width: 0;
 }
 
-/* ==================== LIGHTBOX COMPONENT ==================== */
+/* ==================== LIGHTBOX ==================== */
 
 .lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.94);
+    background: rgba(0,0,0,0.95);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    padding: var(--spacing-lg);
     animation: lightbox-in 0.2s ease;
 }
 
@@ -359,37 +343,34 @@ footer {
 .lightbox--hidden { display: none; }
 
 .lightbox__image {
-    max-width: 90vw;
-    max-height: 90vh;
+    max-width: 88vw;
+    max-height: 88vh;
     object-fit: contain;
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-lg);
 }
 
 .lightbox__close {
     position: fixed;
     top: var(--spacing-md);
     right: var(--spacing-md);
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: none;
+    border: 1px solid rgba(255,255,255,0.3);
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    font-size: 1rem;
-    color: #fff;
+    width: 40px; height: 40px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition-base);
+    transition: var(--transition);
 }
 
 .lightbox__close:hover {
-    background: rgba(255,255,255,0.25);
-    transform: scale(1.1);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
 }
 
-/* ==================== RESPONSIVE DESIGN ==================== */
+/* ==================== RESPONSIVE ==================== */
 
 @media (max-width: 900px) {
     body {
@@ -408,14 +389,13 @@ footer {
         flex-wrap: wrap;
         justify-content: center;
         border-right: none;
-        border-bottom: 1px solid var(--color-secondary-dark);
-        padding: var(--spacing-sm);
-        gap: var(--spacing-xs);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--spacing-sm) var(--spacing-md);
+        gap: 0 var(--spacing-md);
     }
 
     .side-menu__btn {
         width: auto;
-        text-align: center;
     }
 
     .side-menu__submenu {
@@ -428,32 +408,19 @@ footer {
     .side-menu__item--has-submenu:focus-within .side-menu__submenu {
         transform: translate(-50%, 0);
     }
-
-    .filter-btn:hover {
-        transform: none;
-    }
 }
 
 @media (max-width: 480px) {
-    :root {
-        --grid-min-column: 150px;
-    }
-
-    .header__title,
-    header h1 {
-        font-size: var(--font-size-2xl);
-        letter-spacing: 0.2em;
-    }
-
-    .product-card__image,
-    .product-image {
-        height: 200px;
+    .header__title, header h1 {
+        font-size: 1.1rem;
+        letter-spacing: 0.35em;
     }
 }
 
-/* ==================== PRINT STYLES ==================== */
+/* ==================== PRINT ==================== */
 
 @media print {
-    .side-menu, .footer, footer { display: none; }
+    .side-menu, footer { display: none; }
     .product-card { break-inside: avoid; }
 }
+
