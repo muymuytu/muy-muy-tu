@@ -70,64 +70,28 @@
     <main class="main" role="main">
         <!-- Products Grid Component -->
         <section class="products-grid" aria-label="Catálogo de productos">
-            <!-- Product Card: Pendientes Dorados 1 -->
             <article class="product-card hidden" data-category="dorado" data-subcategory="pequeños" role="article">
                 <figure class="product-card__image product-image">
-                    <img src="images/dorado/Pequenos/pequenos1.jpg"
-                         alt="Pendientes Dorados estilo 1"
-                         loading="lazy"
-                         width="280"
-                         height="300">
+                    <img src="images/dorado/Pequenos/pequenos1.jpg" alt="Pendientes Dorados estilo 1" loading="lazy">
                 </figure>
-                <div class="product-card__info product-info">
-                    <h3 class="product-card__title">Pendientes Dorados</h3>
-                    <p class="product-card__category category">Dorado · Pequeños</p>
-                </div>
             </article>
 
-            <!-- Product Card: Pendientes Dorados 2 -->
             <article class="product-card hidden" data-category="dorado" data-subcategory="pequeños" role="article">
                 <figure class="product-card__image product-image">
-                    <img src="images/dorado/Pequenos/pequenos2.jpg"
-                         alt="Pendientes Dorados estilo 2"
-                         loading="lazy"
-                         width="280"
-                         height="300">
+                    <img src="images/dorado/Pequenos/pequenos2.jpg" alt="Pendientes Dorados estilo 2" loading="lazy">
                 </figure>
-                <div class="product-card__info product-info">
-                    <h3 class="product-card__title">Pendientes Dorados</h3>
-                    <p class="product-card__category category">Dorado · Pequeños</p>
-                </div>
             </article>
 
-            <!-- Product Card: Pendientes Dorados 3 -->
             <article class="product-card hidden" data-category="dorado" data-subcategory="pequeños" role="article">
                 <figure class="product-card__image product-image">
-                    <img src="images/dorado/Pequenos/pequenos3.jpg"
-                         alt="Pendientes Dorados estilo 3"
-                         loading="lazy"
-                         width="280"
-                         height="300">
+                    <img src="images/dorado/Pequenos/pequenos3.jpg" alt="Pendientes Dorados estilo 3" loading="lazy">
                 </figure>
-                <div class="product-card__info product-info">
-                    <h3 class="product-card__title">Pendientes Dorados</h3>
-                    <p class="product-card__category category">Dorado · Pequeños</p>
-                </div>
             </article>
 
-            <!-- Product Card: Pendientes Dorados 4 -->
             <article class="product-card hidden" data-category="dorado" data-subcategory="pequeños" role="article">
                 <figure class="product-card__image product-image">
-                    <img src="images/dorado/Pequenos/pequenos4.jpg"
-                         alt="Pendientes Dorados estilo 4"
-                         loading="lazy"
-                         width="280"
-                         height="300">
+                    <img src="images/dorado/Pequenos/pequenos4.jpg" alt="Pendientes Dorados estilo 4" loading="lazy">
                 </figure>
-                <div class="product-card__info product-info">
-                    <h3 class="product-card__title">Pendientes Dorados</h3>
-                    <p class="product-card__category category">Dorado · Pequeños</p>
-                </div>
             </article>
         </section>
     </main>
@@ -136,6 +100,12 @@
     <footer class="footer" role="contentinfo">
         <p>&copy; 2026 muy-muy-tu · Joyería con estilo</p>
     </footer>
+
+    <!-- Lightbox Component -->
+    <div class="lightbox lightbox--hidden" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+        <button class="lightbox__close" id="lightbox-close" aria-label="Cerrar imagen">✕</button>
+        <img class="lightbox__image" id="lightbox-image" src="" alt="">
+    </div>
 
     <!-- JavaScript Module -->
     <script src="js/script.js" defer></script>

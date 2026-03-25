@@ -366,9 +366,92 @@ class CatalogApplication {
     }
 }
 
+// ==================== LIGHTBOX LAYER ====================
+
+/**
+ * Entity - Representa el lightbox del DOM
+ * Single Responsibility: Solo gestiona mostrar/ocultar el lightbox
+ */
+class Lightbox {
+    constructor(lightboxElement, imageElement) {
+        this._lightbox = lightboxElement;
+        this._image = imageElement;
+    }
+
+    open(src, alt) {
+        this._image.src = src;
+        this._image.alt = alt;
+        this._lightbox.classList.remove('lightbox--hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        this._lightbox.classList.add('lightbox--hidden');
+        this._image.src = '';
+        document.body.style.overflow = '';
+    }
+}
+
+/**
+ * Controller - Maneja interacciones del lightbox
+ * Dependency Inversion: depende de la abstracción Lightbox, no del DOM directamente
+ */
+class LightboxController {
+    constructor(lightbox) {
+        this._lightbox = lightbox;
+    }
+
+    initialize() {
+        this._attachImageListeners();
+        this._attachCloseListeners();
+    }
+
+    _attachImageListeners() {
+        document.addEventListener('click', (event) => {
+            const img = event.target.closest('.product-card img');
+            if (img) {
+                this._lightbox.open(img.src, img.alt);
+            }
+        });
+    }
+
+    _attachCloseListeners() {
+        document.getElementById('lightbox-close')
+            .addEventListener('click', () => this._lightbox.close());
+
+        document.getElementById('lightbox')
+            .addEventListener('click', (event) => {
+                if (event.target === event.currentTarget) {
+                    this._lightbox.close();
+                }
+            });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                this._lightbox.close();
+            }
+        });
+    }
+}
+
+/**
+ * Bootstrap del Lightbox
+ */
+class LightboxApplication {
+    static initialize() {
+        const lightboxEl = document.getElementById('lightbox');
+        const imageEl = document.getElementById('lightbox-image');
+
+        const lightbox = new Lightbox(lightboxEl, imageEl);
+        const controller = new LightboxController(lightbox);
+        controller.initialize();
+    }
+}
+
 // ==================== ENTRY POINT ====================
 
 document.addEventListener('DOMContentLoaded', () => {
     CatalogApplication.initialize();
+    LightboxApplication.initialize();
 });
 
