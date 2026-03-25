@@ -6,10 +6,10 @@
 /* ==================== DESIGN TOKENS ==================== */
 
 :root {
-    --color-bg:           #f5ede0;
-    --color-surface:      #faf4ec;
-    --color-bg-soft:      #ede0cc;
-    --color-border:       #d9c9b0;
+    --color-bg:           #efe0cc;
+    --color-surface:      #f7ede0;
+    --color-bg-soft:      #e5d0b8;
+    --color-border:       #d4b99a;
     --color-text:         #7a3b1e;
     --color-text-muted:   #b8865a;
     --color-text-hover:   #5a2a10;
