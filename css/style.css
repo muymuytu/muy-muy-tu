@@ -278,10 +278,13 @@ header {
     grid-area: main;
     padding: var(--spacing-lg);
     position: relative;
-    background:
-        linear-gradient(rgba(239, 224, 204, 0.15), rgba(239, 224, 204, 0.15)),
-        url('../images/fondo.jpg') center top / contain no-repeat;
     background-color: var(--color-bg);
+    background-image:
+        linear-gradient(rgba(239, 224, 204, 0.15), rgba(239, 224, 204, 0.15)),
+        url('../images/fondo.jpg');
+    background-size: auto;
+    background-position: center top;
+    background-repeat: no-repeat;
 }
 
 /* ==================== PRODUCTS GRID ==================== */
