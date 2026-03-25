@@ -35,20 +35,22 @@ class Product {
         const categoryMatches = category.matches(this._category);
         return subcategory ? categoryMatches && subcategory.matches(this._subcategory) : categoryMatches;
     }
-    show() {
-        this._element.classList.remove('hidden');
+    show(index = 0) {
+        const delay = index * 100;
+        this._element.classList.remove('hidden', 'animating');
         this._element.style.display = 'block';
-        // Resetear animación
-        this._element.classList.remove('visible');
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                this._element.classList.add('visible');
-            });
-        });
+        this._element.style.opacity = '0';
+        setTimeout(() => {
+            this._element.style.opacity = '';
+            this._element.classList.add('animating');
+        }, delay);
     }
     hide() {
-        this._element.classList.remove('hidden', 'visible');
+        this._element.classList.remove('animating');
+        this._element.classList.add('hidden');
         this._element.style.display = 'none';
+        this._element.style.opacity = '';
+    }
     }
 }
 
@@ -57,8 +59,13 @@ class Product {
 class FilterProductsUseCase {
     constructor(productRepository) { this._productRepository = productRepository; }
     execute(category, subcategory = null) {
+        let visibleIndex = 0;
         this._productRepository.getAll().forEach(product => {
-            product.matchesFilter(category, subcategory) ? product.show() : product.hide();
+            if (product.matchesFilter(category, subcategory)) {
+                product.show(visibleIndex++);
+            } else {
+                product.hide();
+            }
         });
     }
 }
