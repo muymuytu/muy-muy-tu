@@ -38,9 +38,16 @@ class Product {
     show() {
         this._element.classList.remove('hidden');
         this._element.style.display = 'block';
+        // Resetear animación
+        this._element.classList.remove('visible');
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                this._element.classList.add('visible');
+            });
+        });
     }
     hide() {
-        this._element.classList.add('hidden');
+        this._element.classList.remove('hidden', 'visible');
         this._element.style.display = 'none';
     }
 }
