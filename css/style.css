@@ -1,113 +1,201 @@
-/* Estilos para muy-muy-tu */
+/**
+ * Catálogo muy-muy-tu - Arquitectura CSS Modular
+ * Metodología: BEM (Block Element Modifier)
+ * Principios: DRY, Separation of Concerns, Mobile First
+ */
 
-* {
+/* ==================== DESIGN TOKENS ==================== */
+
+:root {
+    /* Color Palette */
+    --color-primary: #667eea;
+    --color-primary-dark: #764ba2;
+    --color-secondary: #f5f7fa;
+    --color-secondary-dark: #c3cfe2;
+    --color-text-primary: #333;
+    --color-text-secondary: #666;
+    --color-text-light: #fff;
+    --color-background: #f8f9fa;
+    --color-surface: #fff;
+    --color-footer: #2c3e50;
+
+    /* Spacing System (8px grid) */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 1.5rem;   /* 24px */
+    --spacing-lg: 2rem;     /* 32px */
+    --spacing-xl: 3rem;     /* 48px */
+
+    /* Typography Scale */
+    --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-sm: 0.9rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.2rem;
+    --font-size-xl: 1.3rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 2.5rem;
+    --line-height-base: 1.6;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 600;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.2);
+    --shadow-primary: 0 4px 8px rgba(102, 126, 234, 0.3);
+
+    /* Border Radius */
+    --radius-sm: 15px;
+    --radius-pill: 25px;
+
+    /* Transitions */
+    --transition-base: all 0.3s ease;
+
+    /* Layout */
+    --container-max-width: 1400px;
+    --grid-gap: 2rem;
+    --grid-min-column: 280px;
+}
+
+/* ==================== BASE STYLES ==================== */
+
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-base);
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
     min-height: 100vh;
+    color: var(--color-text-primary);
 }
 
-/* Header */
+/* ==================== HEADER BLOCK ==================== */
+
+.header,
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-text-light);
     text-align: center;
-    padding: 3rem 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-xl) var(--spacing-sm);
+    box-shadow: var(--shadow-md);
 }
 
+.header__title,
 header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-xs);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.header__subtitle,
 .subtitle {
-    font-size: 1.2rem;
+    font-size: var(--font-size-lg);
     opacity: 0.9;
 }
 
-/* Navegación / Filtros */
+/* ==================== NAVIGATION BLOCK ==================== */
+
+.nav,
 nav {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1rem;
-    padding: 2rem 1rem;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg) var(--spacing-sm);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
 }
 
+/* Filter Button Component */
 .filter-btn {
-    padding: 0.75rem 1.5rem;
-    border: 2px solid #667eea;
-    background: white;
-    color: #667eea;
-    border-radius: 25px;
+    padding: 0.75rem var(--spacing-md);
+    border: 2px solid var(--color-primary);
+    background: var(--color-surface);
+    color: var(--color-primary);
+    border-radius: var(--radius-pill);
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    transition: var(--transition-base);
+    font-family: inherit;
 }
 
 .filter-btn:hover {
-    background: #667eea;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-text-light);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+    box-shadow: var(--shadow-primary);
 }
 
+.filter-btn--active,
 .filter-btn.active {
-    background: #667eea;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-text-light);
 }
 
-/* Main Content */
+.filter-btn:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ==================== MAIN CONTENT BLOCK ==================== */
+
+.main,
 main {
-    max-width: 1400px;
+    max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: var(--spacing-lg) var(--spacing-sm);
 }
 
-/* Grid de Productos */
+/* ==================== PRODUCTS GRID BLOCK ==================== */
+
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(var(--grid-min-column), 1fr));
+    gap: var(--grid-gap);
+    padding: var(--spacing-sm);
 }
 
-/* Tarjeta de Producto */
+/* ==================== PRODUCT CARD COMPONENT ==================== */
+
 .product-card {
-    background: white;
-    border-radius: 15px;
+    background: var(--color-surface);
+    border-radius: var(--radius-sm);
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-base);
     cursor: pointer;
 }
 
 .product-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-lg);
 }
 
+.product-card--hidden,
+.product-card.hidden {
+    display: none;
+}
+
+/* Product Card Elements */
+.product-card__image,
 .product-image {
     width: 100%;
     height: 300px;
     overflow: hidden;
-    background: #f8f9fa;
+    background: var(--color-background);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.product-card__image img,
 .product-image img {
     width: 100%;
     height: 100%;
@@ -115,64 +203,121 @@ main {
     transition: transform 0.3s ease;
 }
 
+.product-card:hover .product-card__image img,
 .product-card:hover .product-image img {
     transform: scale(1.1);
 }
 
+.product-card__info,
 .product-info {
-    padding: 1.5rem;
+    padding: var(--spacing-md);
 }
 
+.product-card__title,
 .product-info h3 {
-    color: #333;
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-xs);
 }
 
+.product-card__category,
 .category {
-    color: #667eea;
-    font-size: 0.9rem;
-    font-weight: 600;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-/* Footer */
+/* ==================== FOOTER BLOCK ==================== */
+
+.footer,
 footer {
-    background: #2c3e50;
-    color: white;
+    background: var(--color-footer);
+    color: var(--color-text-light);
     text-align: center;
-    padding: 2rem 1rem;
-    margin-top: 3rem;
+    padding: var(--spacing-lg) var(--spacing-sm);
+    margin-top: var(--spacing-xl);
 }
 
-/* Ocultar productos filtrados */
-.product-card.hidden {
-    display: none;
+/* ==================== UTILITY CLASSES ==================== */
+
+.u-hidden {
+    display: none !important;
 }
 
-/* Responsive */
+.u-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+/* Tablet */
 @media (max-width: 768px) {
+    :root {
+        --grid-min-column: 200px;
+        --grid-gap: 1rem;
+    }
+
+    .header__title,
     header h1 {
-        font-size: 2rem;
+        font-size: var(--font-size-2xl);
     }
 
-    .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1rem;
-    }
-
+    .product-card__image,
     .product-image {
         height: 250px;
     }
 
+    .nav,
     nav {
-        padding: 1rem;
+        padding: var(--spacing-sm);
     }
 
     .filter-btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    :root {
+        --grid-min-column: 150px;
+        --spacing-xl: 2rem;
+    }
+
+    .header__title,
+    header h1 {
+        font-size: var(--font-size-xl);
+    }
+
+    .product-card__image,
+    .product-image {
+        height: 200px;
+    }
+}
+
+/* ==================== PRINT STYLES ==================== */
+
+@media print {
+    .nav,
+    nav,
+    .footer,
+    footer {
+        display: none;
+    }
+
+    .product-card {
+        break-inside: avoid;
     }
 }
 
