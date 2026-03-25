@@ -51,7 +51,6 @@ class Product {
         this._element.style.display = 'none';
         this._element.style.opacity = '';
     }
-    }
 }
 
 // ==================== APPLICATION LAYER ====================
