@@ -26,54 +26,61 @@
         </h1>
     </header>
 
-    <!-- Navigation Component -->
-    <nav class="nav" role="navigation" aria-label="Filtros de productos">
-        <button class="filter-btn"
-                data-filter="dorado"
-                aria-pressed="false"
-                aria-label="Ver categoría Dorado">
-            Dorado
-        </button>
-        <button class="filter-btn"
-                data-filter="plateado"
-                aria-pressed="false"
-                aria-label="Ver categoría Plateado">
-            Plateado
-        </button>
-        <button class="filter-btn"
-                data-filter="collares"
-                aria-pressed="false"
-                aria-label="Ver categoría Collares">
-            Collares
-        </button>
-        <button class="filter-btn"
-                data-filter="anillos"
-                aria-pressed="false"
-                aria-label="Ver categoría Anillos">
-            Anillos
-        </button>
-    </nav>
+    <!-- Side Menu Component -->
+    <nav class="side-menu" role="navigation" aria-label="Categorías de productos">
 
-    <!-- Submenu for Dorado (initially hidden) -->
-    <nav class="submenu submenu--hidden" id="submenu-dorado" role="navigation" aria-label="Subcategorías de Dorado">
-        <button class="filter-btn filter-btn--sub"
-                data-category="dorado"
-                data-subcategory="pequeños"
-                aria-label="Ver pendientes pequeños">
-            Pequeños
-        </button>
-        <button class="filter-btn filter-btn--sub"
-                data-category="dorado"
-                data-subcategory="grandes"
-                aria-label="Ver pendientes grandes">
-            Grandes
-        </button>
-        <button class="filter-btn filter-btn--sub"
-                data-category="dorado"
-                data-subcategory="tuerca"
-                aria-label="Ver pendientes tipo tuerca">
-            Tuerca
-        </button>
+        <div class="side-menu__item side-menu__item--has-submenu">
+            <button class="filter-btn side-menu__btn"
+                    data-filter="dorado"
+                    aria-label="Ver categoría Dorado">
+                Dorado
+            </button>
+            <div class="side-menu__submenu" role="menu" aria-label="Subcategorías de Dorado">
+                <button class="filter-btn filter-btn--sub"
+                        data-category="dorado"
+                        data-subcategory="pequeños"
+                        aria-label="Ver pendientes pequeños">
+                    Pequeños
+                </button>
+                <button class="filter-btn filter-btn--sub"
+                        data-category="dorado"
+                        data-subcategory="grandes"
+                        aria-label="Ver pendientes grandes">
+                    Grandes
+                </button>
+                <button class="filter-btn filter-btn--sub"
+                        data-category="dorado"
+                        data-subcategory="tuerca"
+                        aria-label="Ver pendientes tipo tuerca">
+                    Tuerca
+                </button>
+            </div>
+        </div>
+
+        <div class="side-menu__item">
+            <button class="filter-btn side-menu__btn"
+                    data-filter="plateado"
+                    aria-label="Ver categoría Plateado">
+                Plateado
+            </button>
+        </div>
+
+        <div class="side-menu__item">
+            <button class="filter-btn side-menu__btn"
+                    data-filter="collares"
+                    aria-label="Ver categoría Collares">
+                Collares
+            </button>
+        </div>
+
+        <div class="side-menu__item">
+            <button class="filter-btn side-menu__btn"
+                    data-filter="anillos"
+                    aria-label="Ver categoría Anillos">
+                Anillos
+            </button>
+        </div>
+
     </nav>
 
     <!-- Main Content -->
@@ -108,7 +115,7 @@
 
     <!-- Footer Component -->
     <footer class="footer" role="contentinfo">
-        <p>&copy; 2026 muy-muy-tu · Joyería con estilo</p>
+        <p>&copy; 2026 muymuytú</p>
     </footer>
 
     <!-- Lightbox Component -->
